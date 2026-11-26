@@ -1,0 +1,34 @@
+# Dependencies & Package Lockfiles (huge token drains)
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+# Build Outputs & Caches
+.next/
+dist/
+build/
+out/
+.turbo/
+.cache/
+.vercel/
+.wrangler/
+
+# Media, Fonts & Static Assets
+public/images/
+public/fonts/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.svg
+*.mp4
+*.pdf
+*.ico
+
+# Environment, Logs & Testing
+.env*
+*.log
+coverage/
+.git/

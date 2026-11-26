@@ -1,0 +1,389 @@
+/* ══════════════════════════════════════════════════════════════
+   BEATBLOCK — Landing Page v7  (Full-bleed Ozweego 1:1)
+   ══════════════════════════════════════════════════════════════ */
+
+.lp-page {
+  width: 100%;
+  min-height: 100dvh;
+  background: radial-gradient(circle at 50% 44%, #F9F7F2 0%, #F4F1EA 58%, #EBE6DC 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NAV — Ozweego: borderless, airy, minimal uppercase
+   ══════════════════════════════════════════════════════════════ */
+.lp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(24px, 5vw, 72px) 12px;
+  height: 80px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.lp-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.lp-nav-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.lp-nav-name {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #292824;
+  line-height: 1;
+}
+
+.lp-nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.8vw, 40px);
+  flex: 1;
+}
+.lp-nlink {
+  height: 36px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #292824;
+  opacity: 0.78;
+  transition: opacity 150ms ease, transform 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+.lp-nlink::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 8px;
+  right: 8px;
+  height: 1.5px;
+  background-color: #292824;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.lp-nlink:hover { opacity: 1; }
+.lp-nlink:hover::after { transform: scaleX(1); }
+.lp-nlink:focus-visible {
+  outline: 2px solid var(--bb-focus-ring);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.lp-nav-end {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+/* Raised neumorphic search pill (Ozweego style) */
+.lp-nav-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 9999px;
+  background-color: #F4F1EA;
+  color: rgba(41, 40, 36, 0.48);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  min-width: 196px;
+  box-shadow:
+    6px 6px 14px rgba(120, 110, 95, 0.18),
+    -4px -4px 10px rgba(255, 255, 255, 0.88);
+}
+.lp-nav-search-label { color: rgba(41, 40, 36, 0.48); }
+
+.lp-nav-cart {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #292824;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  position: relative;
+}
+.lp-nav-cart::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background-color: #292824;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.lp-nav-cart:hover::after { transform: scaleX(1); }
+.lp-nav-cart:focus-visible { outline: 2px solid var(--bb-focus-ring); border-radius: 2px; }
+
+/* ══════════════════════════════════════════════════════════════
+   HERO — Ozweego 1:1 full-viewport
+   ══════════════════════════════════════════════════════════════ */
+.lp-hero {
+  position: relative;
+  flex: 1;
+  min-height: calc(100dvh - 80px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 28px;
+}
+
+/* Giant condensed orange backdrop wordmark — in front of circle, behind device */
+.lp-bg-name {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%) scaleY(1.34);
+  font-family: var(--bb-font-heading);
+  font-size: clamp(78px, 14.2vw, 214px);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  color: #FF9D5C;
+  opacity: 0.92;
+  text-shadow: 0 12px 32px rgba(180, 70, 15, 0.22);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* Solid orange focal circle */
+.lp-hero-circle {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(290px, 37vw, 510px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #FA8C48 0%, #F4772F 56%, #DC601A 100%);
+  box-shadow:
+    0 28px 72px rgba(244, 119, 47, 0.34),
+    inset 0 2px 12px rgba(255, 210, 175, 0.28);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Echoed secondary device peeking top-left of the circle */
+.lp-device-echo {
+  position: absolute;
+  top: 11%;
+  left: 19%;
+  width: clamp(128px, 16vw, 224px);
+  height: auto;
+  transform: rotate(-16deg);
+  filter: drop-shadow(0 14px 24px rgba(45, 28, 12, 0.18));
+  opacity: 0.78;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  animation: lp-float-echo 7s ease-in-out infinite;
+}
+
+/* Primary floating 3D hardware render */
+.lp-device-wrap {
+  position: relative;
+  z-index: 3;
+  width: clamp(350px, 54vw, 760px);
+  flex-shrink: 0;
+  margin-top: -12px;
+  animation: lp-float-3d 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes lp-float-3d {
+  0%, 100% {
+    transform: perspective(1100px) translateY(0px) rotateX(4deg) rotateY(-3deg);
+  }
+  50% {
+    transform: perspective(1100px) translateY(-10px) rotateX(1deg) rotateY(2deg);
+  }
+}
+
+@keyframes lp-float-echo {
+  0%, 100% {
+    transform: rotate(-16deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-14deg) translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-device-wrap,
+  .lp-device-echo {
+    animation: none;
+  }
+}
+
+.lp-device-render {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter:
+    drop-shadow(0 38px 64px rgba(32, 22, 12, 0.38))
+    drop-shadow(0 14px 26px rgba(32, 22, 12, 0.24));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Left / Right neumorphic carousel arrows */
+.lp-arrow {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #F4F1EA;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(41, 40, 36, 0.65);
+  box-shadow:
+    6px 6px 14px rgba(120, 110, 95, 0.22),
+    -4px -4px 10px rgba(255, 255, 255, 0.88);
+  transition: transform 140ms, color 120ms, box-shadow 140ms;
+  z-index: 5;
+}
+.lp-arrow:hover {
+  color: #292824;
+  transform: translateY(-50%) scale(1.06);
+}
+.lp-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+.lp-arrow:focus-visible {
+  outline: 2px solid var(--bb-focus-ring);
+  outline-offset: 3px;
+}
+.lp-arrow--prev { left: clamp(20px, 4.5vw, 68px); }
+.lp-arrow--next { right: clamp(20px, 4.5vw, 68px); }
+
+/* Bottom-right rounded orange CTA card (Ozweego SHOP NOW) */
+.lp-hero-cta-card {
+  position: absolute;
+  right: clamp(20px, 4vw, 56px);
+  bottom: clamp(20px, 4vh, 42px);
+  width: 156px;
+  height: 146px;
+  border-radius: 22px;
+  background: linear-gradient(155deg, #FA8C48 0%, #F4772F 55%, #D9621F 100%);
+  border: none;
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  z-index: 6;
+  box-shadow:
+    0 18px 38px rgba(217, 98, 31, 0.42),
+    0 4px 12px rgba(217, 98, 31, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 200ms ease;
+}
+.lp-hero-cta-card:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 22px 44px rgba(217, 98, 31, 0.5),
+    0 6px 16px rgba(217, 98, 31, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+.lp-hero-cta-card:active {
+  transform: translateY(0) scale(0.99);
+}
+.lp-hero-cta-card:focus-visible {
+  outline: 2px solid #292824;
+  outline-offset: 3px;
+}
+
+.lp-cta-render {
+  width: 118%;
+  max-width: none;
+  height: auto;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 8px 14px rgba(41, 24, 10, 0.35));
+  pointer-events: none;
+}
+
+.lp-cta-label {
+  font-family: var(--bb-font-sans);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .lp-nav { padding: 18px 24px 10px; }
+  .lp-device-echo { left: 16%; top: 18%; }
+}
+
+@media (max-width: 860px) {
+  .lp-nav-center { gap: 12px; }
+  .lp-nlink { padding: 0 6px; font-size: 10px; }
+}
+
+@media (max-width: 768px) {
+  .lp-nav { padding: 14px 20px 8px; height: 68px; }
+  .lp-hero { min-height: calc(100dvh - 68px); padding-bottom: 20px; }
+  .lp-device-echo { left: 10%; top: 16%; width: clamp(100px, 18vw, 160px); }
+  .lp-device-wrap { width: 84%; }
+  .lp-hero-circle { width: clamp(230px, 56vw, 380px); }
+  .lp-bg-name { font-size: clamp(64px, 15vw, 130px); }
+  .lp-hero-cta-card { right: 18px; bottom: 18px; width: 128px; height: 120px; }
+}
+
+@media (max-width: 540px) {
+  .lp-nav { padding: 12px 16px; height: 60px; }
+  .lp-hero { min-height: calc(100dvh - 60px); padding-bottom: 16px; }
+  .lp-nav-name { display: none; }
+  .lp-nav-center { gap: 4px; justify-content: flex-end; }
+  .lp-nlink { padding: 0 5px; font-size: 9.5px; letter-spacing: 0.06em; }
+  .lp-device-echo { display: none; }
+  .lp-device-wrap { width: 92%; margin-top: 0; }
+  .lp-bg-name { font-size: clamp(48px, 16vw, 90px); }
+  .lp-hero-circle { width: 72%; }
+  .lp-arrow { width: 34px; height: 34px; }
+  .lp-hero-cta-card { width: 114px; height: 106px; right: 14px; bottom: 14px; border-radius: 16px; }
+  .lp-cta-label { font-size: 8.5px; }
+}

@@ -1,0 +1,110 @@
+/* BEATBLOCK Design Tokens — Sourced directly from Figma BEATBLOCK Design System */
+:root {
+  /* Surfaces & Canvas */
+  --bb-canvas: #EAE6DE;
+  --bb-surface: #F2EFE8;
+  --bb-surface-raised: #F2EFE8;
+  --bb-surface-inset: #DDD8CF;
+  --bb-border: #CBC5BA;
+  --bb-border-subtle: #E5E7EB;
+
+  /* Brand Accents */
+  --bb-accent: #F07832;
+  --bb-accent-hover: #E77737;
+  --bb-accent-pressed: #D9621F;
+  --bb-accent-soft: #F6D2BE;
+  --bb-accent-glow: rgba(240, 120, 50, 0.4);
+  --bb-accent-ring: rgba(240, 120, 50, 0.5);
+
+  /* Text Colors */
+  --bb-text-primary: #292824;
+  --bb-text-secondary: #6B665E;
+  --bb-text-muted: #6F695F;
+  --bb-accent-ink: #A84712;
+
+  /* Status Colors */
+  --bb-success: #2E7D32;
+  --bb-warning: #ED6C02;
+  --bb-error: #D32F2F;
+  --bb-focus-ring: rgba(240, 120, 50, 0.5);
+
+  /* Typography */
+  --bb-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --bb-font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --bb-font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows — Neumorphic Depth from Figma */
+  --bb-shadow-raised: 6px 6px 12px 0px rgba(120, 110, 95, 0.25), -6px -6px 12px 0px rgba(255, 255, 255, 0.7);
+  --bb-shadow-raised-sm: 4px 4px 8px 0px rgba(120, 110, 95, 0.2), -4px -4px 8px 0px rgba(255, 255, 255, 0.7);
+  --bb-shadow-inset: inset 3px 3px 6px 0px rgba(120, 110, 95, 0.3), inset -3px -3px 6px 0px rgba(255, 255, 255, 0.6);
+  --bb-shadow-inset-sm: inset 2px 2px 5px 0px rgba(120, 110, 95, 0.25), inset -2px -2px 5px 0px rgba(255, 255, 255, 0.6);
+  --bb-shadow-pressed: inset 2px 2px 5px rgba(120, 110, 95, 0.35), inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+  --bb-shadow-card: 6px 6px 14px 0px rgba(120, 110, 95, 0.28), -6px -6px 14px 0px rgba(255, 255, 255, 0.7);
+
+  /* Accent Shadows & Glows */
+  --bb-shadow-orange-glow: 0px 0px 0px 1px rgba(240, 120, 50, 0.4), 0px 4px 12px 0px rgba(240, 120, 50, 0.4);
+  --bb-shadow-play-active: 0px 0px 0px 4px rgba(240, 120, 50, 0.5);
+  --bb-shadow-pad-active: 6px 6px 12px 0px rgba(120, 110, 95, 0.25), -6px -6px 12px 0px rgba(255, 255, 255, 0.7);
+
+  /* Radii */
+  --bb-radius-sm: 8px;
+  --bb-radius-md: 12px;
+  --bb-radius-lg: 16px;
+  --bb-radius-panel: 16px;
+  --bb-radius-pill: 9999px;
+
+  /* Device enclosure */
+  --bb-device-max-width: 1560px;
+  --bb-device-border: 1px solid var(--bb-border);
+  --bb-device-shadow: 0 16px 40px rgba(120, 110, 95, 0.22), 0 3px 8px rgba(120, 110, 95, 0.14);
+  --bb-channel-col-width: clamp(185px, 17vw, 240px);
+
+  /* Motion */
+  --bb-motion-fast: 100ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --bb-motion-normal: 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --bb-motion-slow: 260ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bb-canvas: #1E1D1B;
+  --bb-surface: #292825;
+  --bb-surface-raised: #292825;
+  --bb-surface-inset: #191816;
+  --bb-border: #44413C;
+  --bb-border-subtle: #383530;
+
+  --bb-accent: #F07832;
+  --bb-accent-hover: #FA8C48;
+  --bb-accent-pressed: #D9621F;
+  --bb-accent-soft: #422513;
+  --bb-accent-glow: rgba(240, 120, 50, 0.5);
+
+  --bb-text-primary: #F2EFE8;
+  --bb-text-secondary: #ABA498;
+  --bb-text-muted: #9A9386;
+  --bb-accent-ink: #FA8C48;
+
+  --bb-shadow-raised: 6px 6px 12px 0px rgba(0, 0, 0, 0.45), -6px -6px 12px 0px rgba(60, 57, 52, 0.35);
+  --bb-shadow-raised-sm: 4px 4px 8px 0px rgba(0, 0, 0, 0.35), -4px -4px 8px 0px rgba(60, 57, 52, 0.25);
+  --bb-shadow-inset: inset 3px 3px 6px 0px rgba(0, 0, 0, 0.5), inset -3px -3px 6px 0px rgba(60, 57, 52, 0.3);
+  --bb-shadow-inset-sm: inset 2px 2px 5px 0px rgba(0, 0, 0, 0.45), inset -2px -2px 5px 0px rgba(60, 57, 52, 0.25);
+  --bb-shadow-card: 6px 6px 14px 0px rgba(0, 0, 0, 0.5), -6px -6px 14px 0px rgba(60, 57, 52, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root[data-reduced-motion='true'] *,
+:root[data-reduced-motion='true'] *::before,
+:root[data-reduced-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

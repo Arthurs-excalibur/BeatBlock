@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "name": "BEATBLOCK Design Tokens",
+    "version": "1.0.0",
+    "status": "proposed-approved-for-build"
+  },
+  "color": {
+    "canvas": "#F5F0E8",
+    "surface": "#F5F0E8",
+    "surfaceRaised": "#F5F0E8",
+    "surfaceInset": "#E9E2D8",
+    "shadow": "#CFC6B9",
+    "highlight": "#FFFFFF",
+    "accent": "#F07816",
+    "accentHover": "#D9650B",
+    "accentSoft": "#FCE2C8",
+    "textPrimary": "#292722",
+    "textSecondary": "#756F66",
+    "border": "#D7CFC3",
+    "success": "#357A52",
+    "warning": "#9A5B12",
+    "error": "#B33A32",
+    "dark": {
+      "canvas": "#242321",
+      "surface": "#2D2B28",
+      "surfaceInset": "#201F1D",
+      "shadow": "#171614",
+      "highlight": "#3B3834",
+      "accent": "#FF8A2A",
+      "textPrimary": "#F5F0E8",
+      "textSecondary": "#B9B1A6",
+      "border": "#48433D"
+    }
+  },
+  "typography": {
+    "fontFamily": "Manrope, Inter, system-ui, sans-serif",
+    "display": {
+      "size": "clamp(2rem, 5vw, 4rem)",
+      "weight": 800,
+      "lineHeight": 1.0
+    },
+    "h1": {
+      "size": "2rem",
+      "weight": 750,
+      "lineHeight": 1.15
+    },
+    "h2": {
+      "size": "1.5rem",
+      "weight": 700,
+      "lineHeight": 1.2
+    },
+    "body": {
+      "size": "1rem",
+      "weight": 450,
+      "lineHeight": 1.5
+    },
+    "label": {
+      "size": "0.75rem",
+      "weight": 650,
+      "letterSpacing": "0.04em"
+    },
+    "numeric": {
+      "fontVariantNumeric": "tabular-nums"
+    }
+  },
+  "radius": {
+    "control": "999px",
+    "small": "8px",
+    "medium": "12px",
+    "large": "18px",
+    "panel": "22px"
+  },
+  "spacing": {
+    "0": "0",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px"
+  },
+  "shadow": {
+    "raised": "6px 6px 14px var(--bb-shadow), -6px -6px 14px var(--bb-highlight)",
+    "raisedSmall": "3px 3px 7px var(--bb-shadow), -3px -3px 7px var(--bb-highlight)",
+    "inset": "inset 4px 4px 8px var(--bb-shadow), inset -4px -4px 8px var(--bb-highlight)",
+    "pressed": "inset 2px 2px 5px var(--bb-shadow), inset -2px -2px 5px var(--bb-highlight)",
+    "focus": "0 0 0 3px var(--bb-focus-ring)"
+  },
+  "motion": {
+    "fast": "120ms",
+    "normal": "180ms",
+    "slow": "240ms",
+    "easing": "cubic-bezier(0.2, 0.7, 0.2, 1)"
+  },
+  "zIndex": {
+    "base": 0,
+    "controls": 10,
+    "header": 20,
+    "overlay": 50,
+    "dialog": 60,
+    "toast": 70
+  },
+  "breakpoints": {
+    "small": "480px",
+    "medium": "768px",
+    "wide": "1024px",
+    "instrumentWide": "1100px"
+  },
+  "instrument": {
+    "channels": 8,
+    "stepsPerPattern": 16,
+    "minTouchTarget": "44px",
+    "mobileOrientation": "landscape-preferred",
+    "pageScrollInStudio": false
+  }
+}

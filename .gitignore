@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+*.local
+.taste-skill
+inspo
+Prompt.md
+refinement.md
