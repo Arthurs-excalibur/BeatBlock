@@ -7,6 +7,7 @@ import { PortraitPrompt } from './components/responsive/PortraitPrompt';
 import { SettingsModal } from './components/settings/SettingsModal';
 import { audioEngine } from './engine/AudioEngine';
 import { getChannelVoiceTypeForKit } from './engine/sampleVoice';
+import { type ThemeId } from './components/settings/ThemePicker';
 import {
   PatternData, recoverWorkingSession, saveWorkingSession, getNamedPatterns, saveNamedPattern,
   savePatternAs, duplicateNamedPattern, renameNamedPattern, deleteNamedPattern, parsePatternFile, serializePattern,
@@ -28,9 +29,9 @@ export const App: React.FC = () => {
   });
 
   // Theme state
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+  const [theme, setTheme] = useState<ThemeId>(() => {
     try {
-      return (localStorage.getItem(THEME_STORAGE_KEY) as 'light' | 'dark') || 'light';
+      return (localStorage.getItem(THEME_STORAGE_KEY) as ThemeId) || 'light';
     } catch {
       return 'light';
     }
@@ -80,7 +81,7 @@ export const App: React.FC = () => {
 
   // Apply theme to DOM
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : theme);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
     } catch {
@@ -343,6 +344,10 @@ export const App: React.FC = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
+  const handleSelectTheme = useCallback((id: ThemeId) => {
+    setTheme(id);
+  }, []);
+
   const handleToggleReducedMotion = useCallback(() => {
     setReducedMotion((prev) => !prev);
   }, []);
@@ -504,7 +509,7 @@ export const App: React.FC = () => {
           const previewReady = await audioEngine.previewChannel('ch-kick', kitId);
           if (!previewReady) setSaveToast('Audio unavailable — check browser audio permissions');
         }}
-        onToggleTheme={handleToggleTheme}
+        onSelectTheme={handleSelectTheme}
         reducedMotion={reducedMotion}
         onToggleReducedMotion={handleToggleReducedMotion}
         onReplayIntro={handleReplayIntro}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Settings, Save, ChevronUp } from 'lucide-react';
-import { KitId } from '../../types';
+import { KitId, ThemeId } from '../../types';
 
 interface TopBarProps {
   activeKit?: KitId;
   activePatternName: string;
-  theme?: 'light' | 'dark';
+  theme?: ThemeId;
   onOpenSettings: () => void;
   onOpenSave: () => void;
   onToggleTheme?: () => void;
@@ -41,9 +41,10 @@ export const TopBar: React.FC<TopBarProps> = ({
           className="font-heading brand-title"
           data-node-id="3:1345"
         >
-          BEATBLOCK
+          BeatBlock
         </div>
-        <span className="brand-subtitle hide-on-mobile">TR-GROOVEBOX</span>
+        <span className="brand-subtitle hide-on-mobile">BB-01</span>
+        <span className="brand-spec-stamp hide-on-mobile font-mono" aria-hidden="true">8×16 SEQ</span>
       </div>
 
       {/* Center: Pattern indicator */}

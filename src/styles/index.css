@@ -32,8 +32,8 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   gap: 6px;
   transition: transform var(--bb-motion-fast), box-shadow var(--bb-motion-fast), background-color var(--bb-motion-fast);
 }
-.btn-hardware:hover { background: #F8F5EE; }
-[data-theme="dark"] .btn-hardware:hover { background: #33312C; }
+.btn-hardware:hover { background: color-mix(in srgb, var(--bb-surface-raised) 92%, var(--bb-text-primary)); }
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .btn-hardware:hover { background: color-mix(in srgb, var(--bb-surface-raised) 88%, #ffffff); }
 .btn-hardware:active { transform: translateY(1px); box-shadow: var(--bb-shadow-pressed); }
 
 .btn-primary-orange {
@@ -48,7 +48,7 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
 .hide-on-mobile { display: initial; }
 .mobile-only-btn { display: none !important; }
 
-/* ── Device Enclosure (Drumhaus / Groovebox chassis) ──────── */
+/* ── Device Enclosure (BeatBlock BB-01 Split Hardware Chassis) ── */
 .studio-layout {
   width: 100%;
   height: 100%;
@@ -59,34 +59,92 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   justify-content: center;
   overflow: hidden;
   position: relative;
-  background: var(--bb-canvas);
-  padding: clamp(8px, 2vh, 20px) clamp(8px, 2vw, 20px);
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--bb-canvas) 92%, #ffffff) 0%, var(--bb-canvas) 70%, color-mix(in srgb, var(--bb-canvas) 88%, #000000) 100%);
+  padding: clamp(10px, 2.2vh, 24px) clamp(10px, 2.2vw, 24px);
 }
-.device-body {
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .studio-layout {
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--bb-canvas) 88%, #ffffff) 0%, var(--bb-canvas) 72%, color-mix(in srgb, var(--bb-canvas) 65%, #000000) 100%);
+}
+.device-shell-shadow {
   width: 100%;
   max-width: var(--bb-device-max-width);
   height: auto;
   max-height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: visible;
-  border: var(--bb-device-border);
-  border-radius: 12px;
-  box-shadow: var(--bb-device-shadow);
-  background: var(--bb-surface);
+  filter: drop-shadow(0 26px 44px rgba(38, 34, 26, 0.24)) drop-shadow(0 6px 12px rgba(38, 34, 26, 0.14));
+}
+.device-body {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+  clip-path: polygon(
+    14px 0, calc(100% - 14px) 0,
+    100% 14px, 100% calc(100% - 14px),
+    calc(100% - 14px) 100%, 14px 100%,
+    0 calc(100% - 14px), 0 14px
+  );
+  background: var(--bb-chassis-grey);
   position: relative;
+}
+.device-chassis-left {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bb-chassis-grey) 96%, #ffffff) 0%, var(--bb-chassis-grey) 100%);
+  border-bottom: 7px solid var(--bb-chassis-grey-lip);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.6),
+    inset 2px 0 0 rgba(255, 255, 255, 0.35),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.14);
+  position: relative;
+}
+.device-chassis-left::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+}
+.device-chassis-right {
+  width: clamp(244px, 20.5vw, 292px);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(172deg, color-mix(in srgb, var(--bb-chassis-orange) 86%, #ffffff) 0%, var(--bb-chassis-orange) 55%, color-mix(in srgb, var(--bb-chassis-orange) 82%, #000000) 100%);
+  border-left: 2.5px solid rgba(40, 34, 26, 0.42);
+  border-bottom: 7px solid var(--bb-chassis-orange-lip);
+  box-shadow:
+    inset 2px 0 0 rgba(255, 225, 200, 0.24),
+    inset 0 2px 0 rgba(255, 225, 200, 0.36),
+    inset -2px 0 0 rgba(0, 0, 0, 0.12),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+  color: var(--bb-chassis-orange-ink);
+  position: relative;
+}
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .device-chassis-right {
+  background: linear-gradient(172deg, color-mix(in srgb, var(--bb-chassis-orange) 88%, #ffffff) 0%, var(--bb-chassis-orange) 60%, color-mix(in srgb, var(--bb-chassis-orange) 76%, #000000) 100%);
 }
 
 /* ── Top Bar ──────────────────────────────────────────────── */
 .top-bar {
-  height: 56px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(14px, 2.2vw, 28px);
-  border-bottom: 1px solid var(--bb-border);
+  padding: 0 clamp(14px, 2vw, 24px);
+  border-bottom: 1px solid color-mix(in srgb, var(--bb-border) 85%, transparent);
   z-index: 30;
-  background-color: var(--bb-surface-raised);
+  background-color: transparent;
+  box-shadow: none;
   flex-shrink: 0;
 }
 .brand-group {
@@ -123,8 +181,18 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--bb-text-secondary);
-  opacity: 0.8;
+  opacity: 0.85;
   margin-left: 2px;
+}
+.brand-spec-stamp {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--bb-text-muted);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid color-mix(in srgb, var(--bb-border) 80%, transparent);
+  opacity: 0.78;
 }
 .header-center-group {
   display: flex;
@@ -365,54 +433,174 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   padding: 0;
 }
 
-/* ── Transport Bar ────────────────────────────────────────── */
+/* ── Transport Bar (BB-01 Orange Control Wing) ─────────────── */
 .transport-bar {
-  height: 64px;
-  border-bottom: 1px solid var(--bb-border);
+  flex: 1 1 auto;
   display: flex;
-  align-items: center;
-  padding: 0 clamp(14px, 2.2vw, 28px);
-  background-color: var(--bb-canvas);
-  gap: clamp(14px, 2vw, 24px);
-  flex-shrink: 0;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px 16px;
+  background: transparent;
+  gap: 12px;
   z-index: 20;
-  box-shadow: var(--bb-shadow-raised-sm);
+  min-height: 0;
 }
-
-/* Play/Stop Button — Tactile Signal Orange Hardware Trigger */
-.btn-transport-play {
-  height: 46px;
-  padding: 0 22px;
-  border-radius: 9999px;
-  background-color: var(--bb-accent);
-  border: 1.5px solid var(--bb-text-primary);
-  box-shadow: var(--bb-shadow-raised-sm);
-  color: #292824;
+.wing-top-section {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wing-top-section .kit-selector-wrapper,
+.wing-top-section .kit-selector-btn {
+  width: 100%;
+  justify-content: space-between;
+}
+.wing-top-section .kit-selector-btn {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+  color: var(--bb-chassis-orange-ink);
+}
+.wing-top-section .kit-label-prefix,
+.wing-top-section .kit-name-value,
+.wing-top-section .kit-chevron {
+  color: var(--bb-chassis-orange-ink);
+}
+.wing-divider {
+  width: 100% !important;
+  height: 1px !important;
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+.wing-label {
+  color: var(--bb-chassis-orange-ink) !important;
+  opacity: 0.85;
+}
+.wing-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 8px;
+  align-items: start;
+}
+.wing-control-cell {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 5px;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.wing-knob-cap {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 38% 32%, #FF8947 0%, var(--bb-chassis-orange) 62%, #B54109 100%);
+  border: 1.5px solid rgba(55, 20, 4, 0.32);
+  box-shadow:
+    -3px 5px 8px rgba(45, 16, 2, 0.36),
+    0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.34);
+  position: relative;
+  flex-shrink: 0;
+  transition: transform 80ms ease;
+}
+.wing-knob-notch {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5px;
+  height: 9px;
+  border-radius: 2px;
+  background: rgba(255, 232, 214, 0.88);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+.wing-tools-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.wing-tempo-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.wing-bottom-deck {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding-top: 6px;
+}
+.wing-speaker-grille {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 88px;
+  border-radius: 8px;
+  background-image: radial-gradient(circle, #351505 2px, transparent 2.5px);
+  background-size: 9px 9px;
+  background-position: center;
+  opacity: 0.92;
+  transform-origin: center;
+  will-change: transform;
+}
+.wing-speaker-grille.is-playing {
+  animation: speakerBounce 440ms cubic-bezier(0.25, 0.9, 0.35, 1) infinite;
+}
+@keyframes speakerBounce {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(53, 21, 5, 0));
+  }
+  28% {
+    transform: scale(1.045);
+    filter: drop-shadow(0 2px 4px rgba(53, 21, 5, 0.28));
+  }
+  60% {
+    transform: scale(0.985);
+  }
+}
+
+/* Play/Stop Button — Large Tactile Grey Keycap on Orange Wing */
+.btn-transport-play {
+  width: 100%;
+  height: 86px;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #E8E5DC 0%, #D4D0C6 100%);
+  border: 1.5px solid #8A8478;
+  border-bottom-width: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  color: #292824;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
   flex-shrink: 0;
   font-family: var(--bb-font-sans);
   font-weight: 800;
-  font-size: 13.5px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: transform var(--bb-motion-fast), box-shadow var(--bb-motion-fast), background-color var(--bb-motion-fast);
 }
 .btn-transport-play:hover {
-  background-color: var(--bb-accent-hover);
+  background: linear-gradient(180deg, #F0EDE5 0%, #DCD8CE 100%);
 }
 .btn-transport-play:active {
-  transform: translateY(1px) scale(0.96);
-  box-shadow: var(--bb-shadow-pressed);
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .btn-transport-play.is-playing {
-  background-color: var(--bb-accent-hover);
-  box-shadow: var(--bb-shadow-play-active);
-  transform: scale(0.96);
+  background: linear-gradient(180deg, #FFF5EC 0%, #F6D2BE 100%);
+  border-color: #292824;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.55), 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 .btn-transport-text {
   line-height: 1;
@@ -421,35 +609,49 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
 /* Transport Controls: BPM & Swing */
 .transport-control-group {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   flex-shrink: 0;
 }
 .btn-bpm-step {
-  width: 27px;
-  height: 27px;
+  width: 24px;
+  height: 24px;
   border-radius: 5px;
   padding: 0;
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14);
+  color: var(--bb-chassis-orange-ink);
+}
+.btn-bpm-step:hover {
+  background: rgba(255, 255, 255, 0.34);
 }
 .transport-tempo-tools {
   display: flex;
   align-items: center;
   gap: 3px;
-  margin-left: 2px;
 }
 .btn-tempo-tool {
-  height: 25px;
-  padding: 0 6px;
-  font-size: 10px;
+  height: 22px;
+  padding: 0 5px;
+  font-size: 9.5px;
   font-weight: 700;
   border-radius: 4px;
   letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: none;
+  color: var(--bb-chassis-orange-ink);
+}
+.btn-tempo-tool:hover {
+  background: rgba(255, 255, 255, 0.34);
 }
 .btn-tempo-tool.active-tap {
-  background-color: var(--bb-accent);
-  color: #292824;
-  border-color: var(--bb-accent-hover);
-  box-shadow: var(--bb-shadow-orange-glow);
+  background-color: #292824;
+  color: #fff;
+  border-color: #292824;
+  box-shadow: none;
 }
 .transport-display-readout {
   display: flex;
@@ -458,40 +660,42 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   gap: 1px;
 }
 .transport-value {
-  font-size: 21px;
-  font-weight: 700;
-  color: var(--bb-text-primary);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--bb-chassis-orange-ink);
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 .btn-swing-toggle {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 9px;
+  padding: 2px 4px;
   border-radius: 6px;
   flex-shrink: 0;
   transition: background-color var(--bb-motion-fast);
 }
 .btn-swing-toggle:hover {
-  background: var(--bb-surface-inset);
+  background: rgba(0, 0, 0, 0.08);
 }
 
 /* Volume Slider */
 .transport-volume-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
 }
 .master-volume-header {
   display: flex;
   align-items: center;
   gap: 5px;
+  color: var(--bb-chassis-orange-ink);
 }
 .btn-master-mute {
   background: none;
@@ -502,22 +706,27 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   align-items: center;
   justify-content: center;
   border-radius: 3px;
+  color: var(--bb-chassis-orange-ink);
   transition: opacity var(--bb-motion-fast);
 }
 .btn-master-mute:hover {
   opacity: 0.75;
 }
 .master-volume-track {
-  width: 125px;
+  width: 100%;
+  min-width: 78px;
   height: 10px;
   border-radius: 999px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 .master-volume-fill {
   height: 100%;
-  background-color: var(--bb-accent);
+  background-color: #ECEAE3;
   border-radius: 999px;
   transition: width var(--bb-motion-fast);
 }
@@ -526,25 +735,30 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
 .transport-pattern-banks-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 6px;
   flex-shrink: 0;
 }
 .pattern-banks-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  flex: 1;
   gap: 4px;
-  padding: 4px;
+  padding: 3px;
   border-radius: 8px;
+  background: rgba(0, 0, 0, 0.16);
+  border-color: rgba(0, 0, 0, 0.14);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.22);
 }
 .pattern-bank-btn {
-  width: 33px;
-  height: 33px;
+  height: 28px;
   border-radius: 5px;
-  border: 1px solid var(--bb-border);
-  background-color: var(--bb-surface-raised);
-  box-shadow: var(--bb-shadow-raised-sm);
-  color: var(--bb-text-primary);
-  font-size: 13.5px;
-  font-weight: 700;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  color: var(--bb-chassis-orange-ink);
+  font-size: 12px;
+  font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -552,65 +766,149 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   transition: all var(--bb-motion-fast);
 }
 .pattern-bank-btn:hover:not(.active) {
-  background-color: #F8F5EE;
+  background-color: rgba(255, 255, 255, 0.34);
 }
 .pattern-bank-btn.active {
-  background-color: var(--bb-accent);
-  border-color: var(--bb-accent-hover);
-  box-shadow: var(--bb-shadow-orange-glow);
+  background-color: #ECEAE3;
+  border-color: #292824;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
   color: #292824;
 }
 .transport-utility-tools {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 5px;
   flex-shrink: 0;
+  width: 100%;
+  height: 100%;
 }
 .btn-utility-tool {
-  height: 35px;
-  padding: 0 10px;
-  font-size: 11px;
-  font-weight: 700;
-  gap: 5px;
-  letter-spacing: 0.05em;
-  color: var(--bb-text-primary);
+  width: 100%;
+  height: 27px;
+  padding: 0 8px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  border-radius: 5px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.16) 100%);
+  border: 1px solid rgba(40, 18, 5, 0.22);
+  border-bottom-width: 2.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  color: var(--bb-chassis-orange-ink);
 }
 .btn-utility-tool:hover {
-  background-color: #F8F5EE;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.24) 100%);
+}
+.btn-utility-tool:active {
+  transform: translateY(1px);
+  border-bottom-width: 1px;
 }
 .btn-clear-pattern {
-  height: 35px;
-  padding: 0 12px;
-  font-size: 11px;
-  font-weight: 700;
-  gap: 5px;
-  letter-spacing: 0.05em;
-  color: var(--bb-text-secondary);
+  background: linear-gradient(180deg, rgba(28, 20, 15, 0.18) 0%, rgba(28, 20, 15, 0.28) 100%);
+  color: var(--bb-chassis-orange-ink);
 }
 .btn-clear-pattern:hover {
-  color: var(--bb-error);
+  background: linear-gradient(180deg, rgba(28, 20, 15, 0.26) 0%, rgba(28, 20, 15, 0.36) 100%);
+  color: #FFFFFF;
 }
 
-/* ── Sequencer Workspace ──────────────────────────────────── */
+/* ── Hardware Top Knob Deck (8 Dark Charcoal Channel Knobs) ── */
+.hardware-knob-deck {
+  display: grid;
+  grid-template-columns: var(--bb-channel-col-width) minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
+  padding: 10px clamp(14px, 2.2vw, 28px) 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--bb-border) 65%, transparent);
+  background: color-mix(in srgb, var(--bb-chassis-grey) 94%, #000000);
+  flex-shrink: 0;
+}
+.knob-deck-spacer {
+  display: flex;
+  align-items: center;
+  padding-left: 14px;
+}
+.knob-deck-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--bb-text-secondary);
+  opacity: 0.85;
+}
+.knob-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+  align-items: center;
+}
+.hw-knob-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.hw-charcoal-knob {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 50% 55%, #373735 0%, #242422 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ns-resize;
+  box-shadow: -3px 5px 8px rgba(38, 34, 28, 0.34), inset 0 1px 1px rgba(255, 255, 255, 0.14);
+}
+.hw-charcoal-knob-cap {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 38% 30%, #6D6D69 0%, #52524F 65%, #3E3E3C 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  display: block;
+}
+.hw-charcoal-knob-notch {
+  position: absolute;
+  top: 2.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 7px;
+  border-radius: 1px;
+  background: #D9D6CE;
+}
+.hw-knob-caption {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bb-text-secondary);
+  line-height: 1;
+}
+
+/* ── Sequencer Workspace (Unified BB-01 Keybed Board) ───────── */
 .sequencer-workspace {
   flex: 0 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  padding: 14px clamp(14px, 2.2vw, 28px) 18px;
+  gap: 6px;
+  padding: 12px clamp(14px, 2.2vw, 26px) 16px;
   overflow: hidden;
+  background: var(--bb-chassis-grey);
 }
 .step-header, .channel-row {
   display: grid;
   grid-template-columns: var(--bb-channel-col-width) minmax(0, 1fr);
-  column-gap: 12px;
+  column-gap: 14px;
   align-items: center;
 }
 .step-header {
-  min-height: 24px;
-  flex: 0 0 24px;
-  padding-right: 12px;
+  min-height: 18px;
+  flex: 0 0 18px;
+  padding-right: 4px;
 }
 .channel-header-spacer {
   min-width: 0;
@@ -620,7 +918,7 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
 .step-grid {
   display: grid;
   grid-template-columns: repeat(16, minmax(0, 1fr));
-  gap: 3.5px;
+  gap: 5px;
   min-width: 0;
   align-items: center;
 }
@@ -658,40 +956,44 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   box-shadow: var(--bb-shadow-orange-glow);
 }
 
-/* ── Channel Rows ─────────────────────────────────────────── */
+/* ── Channel Rows (Flush Hardware Silkscreen + Keycaps) ──── */
 .channel-list {
   flex: 0 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 5.5px;
+  gap: 6px;
 }
 .channel-row {
   position: relative;
-  height: 60px;
-  min-height: 50px;
-  max-height: 66px;
-  padding: 5px 12px 5px 0;
-  border-radius: 8px;
-  background: var(--bb-surface-raised);
-  overflow: hidden;
+  height: 50px;
+  min-height: 44px;
+  max-height: 56px;
+  padding: 2px 4px 2px 0;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
 }
 .channel-row.is-muted {
-  background: color-mix(in srgb, var(--bb-surface-raised) 75%, var(--bb-surface-inset));
+  opacity: 0.62;
 }
-.channel-row.is-solo {
-  background: color-mix(in srgb, var(--bb-surface-raised) 90%, var(--bb-accent));
+.channel-row.is-solo .channel-header {
+  background: color-mix(in srgb, var(--bb-chassis-grey) 82%, var(--bb-accent));
+  border-radius: 6px;
 }
 .channel-accent {
   position: absolute;
   left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--bb-accent);
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--bb-accent) 70%, var(--bb-border));
 }
 .channel-row.is-muted .channel-accent {
-  opacity: .3;
+  opacity: .25;
 }
 .channel-header {
   min-width: 0;
@@ -782,55 +1084,85 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   color: #292824;
 }
 
-/* ── Hardware Step Pads (Roland TR / Drumhaus Tactile Key) ── */
+/* ── Hardware Step Pads (BeatBlock BB-01 Sculpted Keycaps) ── */
 .channel-row .step-grid {
   height: 100%;
 }
 .step-pad {
   width: 100%;
   height: 100%;
-  border-radius: 4px;
-  border: 1px solid var(--bb-border);
-  background-color: var(--bb-surface-raised);
-  box-shadow: var(--bb-shadow-raised-sm);
+  border-radius: 7px;
+  border: 1px solid #C8C4B8;
+  border-bottom-width: 4px;
+  border-bottom-color: #B2ADA0;
+  background: linear-gradient(180deg, #F6F4EF 0%, var(--bb-keycap) 100%);
+  box-shadow:
+    0 2px 4px rgba(45, 40, 32, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: transform 60ms ease, background-color 60ms ease, box-shadow 60ms ease;
+  transition: transform 55ms ease, background 55ms ease, box-shadow 55ms ease, border-color 55ms ease;
+}
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .step-pad {
+  border-color: var(--bb-border);
+  border-bottom-color: color-mix(in srgb, var(--bb-surface-inset) 70%, #000000);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bb-keycap) 90%, #ffffff) 0%, var(--bb-keycap) 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 .step-pad:active {
-  transform: translateY(1px) scale(0.96);
-  box-shadow: var(--bb-shadow-pressed);
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+  box-shadow: 0 1px 2px rgba(45, 40, 32, 0.14);
 }
 
-/* Roland TR 4-beat alternating rhythm grouping */
-/* Groups 1 & 3 (Steps 5-8 and 13-16) have subtle recessed tone for instant rhythmic orientation */
+/* Hardware corner LED on every keycap (as seen in BB-01 render) */
+.pad-corner-led {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: rgba(185, 130, 90, 0.3);
+  transition: background-color 55ms ease, box-shadow 55ms ease;
+}
+.step-pad.is-active .pad-corner-led {
+  background: #FFFDF8;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.95), 0 0 10px rgba(240, 120, 50, 0.9);
+}
+
+/* Subtle 4-beat grouping without breaking the unified cream keycap look */
 .step-pad.pad-group-1:not(.is-active),
 .step-pad.pad-group-3:not(.is-active) {
-  background-color: color-mix(in srgb, var(--bb-surface-raised) 75%, var(--bb-surface-inset));
+  background: linear-gradient(180deg, var(--bb-keycap) 0%, var(--bb-keycap-recessed) 100%);
 }
-[data-theme="dark"] .step-pad.pad-group-1:not(.is-active),
-[data-theme="dark"] .step-pad.pad-group-3:not(.is-active) {
-  background-color: color-mix(in srgb, var(--bb-surface-raised) 65%, var(--bb-surface-inset));
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .step-pad.pad-group-1:not(.is-active),
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .step-pad.pad-group-3:not(.is-active) {
+  background: linear-gradient(180deg, var(--bb-keycap-recessed) 0%, color-mix(in srgb, var(--bb-keycap-recessed) 85%, #000000) 100%);
 }
 
-/* Beat 1 separator: Step 1 of each 4-beat group (downbeat) */
+/* Beat 1 separator: subtle tactile marker */
 .step-pad.is-downbeat {
-  border-left-width: 2px;
-  border-left-color: rgba(175, 160, 140, 0.8);
+  border-left-width: 1.5px;
+  border-left-color: rgba(160, 150, 135, 0.75);
 }
-[data-theme="dark"] .step-pad.is-downbeat {
-  border-left-color: rgba(90, 85, 78, 0.9);
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .step-pad.is-downbeat {
+  border-left-color: color-mix(in srgb, var(--bb-border) 80%, #ffffff);
 }
 
-/* Active Step Pad — Signal Orange Glow */
+/* Active Step Pad — Illuminated Accent Keycap */
 .step-pad.is-active {
-  background-color: var(--bb-accent);
-  border-color: var(--bb-accent-hover);
-  box-shadow: 0 0 8px rgba(240, 120, 50, 0.4), var(--bb-shadow-raised-sm);
+  background: linear-gradient(180deg, var(--bb-accent-hover) 0%, var(--bb-accent) 100%);
+  border-color: var(--bb-accent-pressed);
+  border-bottom-color: color-mix(in srgb, var(--bb-accent-pressed) 75%, #000000);
+  box-shadow:
+    0 0 10px var(--bb-accent-glow),
+    0 2px 4px rgba(45, 40, 32, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 /* Muted Active Step */
@@ -850,12 +1182,12 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
   box-shadow: 0 0 12px rgba(240, 120, 50, 0.7), var(--bb-shadow-raised);
 }
 .step-pad.is-current:not(.is-active) {
-  background-color: #E8E3D8;
+  background-color: var(--bb-keycap-recessed);
   border-color: var(--bb-accent);
   box-shadow: inset 1px 1px 3px rgba(120, 110, 95, 0.25);
 }
-[data-theme="dark"] .step-pad.is-current:not(.is-active) {
-  background-color: #383530;
+:is([data-theme="dark"], [data-theme="midnight"], [data-theme="ember"]) .step-pad.is-current:not(.is-active) {
+  background-color: var(--bb-surface-raised);
   border-color: var(--bb-accent);
 }
 
@@ -890,38 +1222,130 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
 }
 
 /* ── Responsive Adaptations ───────────────────────────────── */
-@media (max-width: 1100px) and (orientation: landscape) {
-  .step-header, .channel-row { grid-template-columns: 130px minmax(0, 1fr); column-gap: 6px; }
-  .channel-header { grid-template-columns: minmax(0, 1fr) 46px; gap: 4px; }
+/* Tablet & Phone Landscape: keep BB-01 side-by-side split hardware chassis */
+@media (max-width: 1100px) and (orientation: landscape), (max-height: 560px) and (orientation: landscape) {
+  .studio-layout { padding: 4px 6px !important; }
+  .device-shell-shadow { height: 100% !important; }
+  .device-body {
+    height: 100% !important;
+    max-width: 100% !important;
+    flex-direction: row !important;
+    clip-path: polygon(
+      10px 0, calc(100% - 10px) 0,
+      100% 10px, 100% calc(100% - 10px),
+      calc(100% - 10px) 100%, 10px 100%,
+      0 calc(100% - 10px), 0 10px
+    ) !important;
+  }
+  .device-chassis-left {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    border-bottom-width: 3px !important;
+  }
+  .device-chassis-right {
+    width: clamp(168px, 23vw, 212px) !important;
+    flex-shrink: 0 !important;
+    border-left: 2px solid color-mix(in srgb, var(--bb-chassis-grey-lip) 75%, #000000) !important;
+    border-top: none !important;
+    border-bottom-width: 3px !important;
+    overflow-y: auto;
+  }
+  .top-bar { height: 34px !important; padding: 0 10px !important; }
+  .brand-logo { height: 20px !important; }
+  .brand-title { font-size: 13px !important; }
+  .btn-save { height: 24px !important; padding: 0 8px !important; font-size: 10px !important; }
+  .btn-icon-round { width: 24px !important; height: 24px !important; }
+  .hide-on-mobile { display: none !important; }
+  .mobile-only-btn { display: inline-flex !important; align-items: center; justify-content: center; }
+
+  .sequencer-workspace { flex: 1 !important; gap: 2px !important; padding: 3px 8px 5px !important; }
+  .step-header, .channel-row { grid-template-columns: clamp(98px, 16vw, 134px) minmax(0, 1fr) !important; column-gap: 6px !important; }
+  .step-header { min-height: 14px !important; flex-basis: 14px !important; padding-right: 4px !important; }
+  .step-number { font-size: 9.5px !important; }
+  .channel-list { flex: 1 !important; gap: 2px !important; justify-content: stretch !important; }
+  .channel-row { flex: 1 1 0 !important; min-height: 22px !important; max-height: none !important; padding: 2px 4px 2px 0 !important; border-radius: 5px !important; }
+  .channel-header { grid-template-columns: minmax(0, 1fr) 44px !important; gap: 4px !important; padding-left: 8px !important; }
   .channel-volume { display: none !important; }
-  .sequencer-workspace { gap: 2px; padding: 4px 6px; }
-  .step-header { min-height: 14px; flex-basis: 14px; }
-  .channel-row { min-height: 24px; max-height: none; padding-top: 1px; padding-bottom: 1px; border-radius: 4px; }
-  .channel-list { gap: 2px; }
-  .channel-name-text { font-size: 10px; }
-  .channel-badge { display: none; }
-  .channel-toggle { height: 20px; width: 20px; font-size: 9px; }
-  .step-pad { height: 100%; border-radius: 3px; }
+  .channel-name-text { font-size: 10px !important; }
+  .channel-badge { display: none !important; }
+  .channel-actions { gap: 3px !important; }
+  .channel-toggle { height: 20px !important; width: 20px !important; font-size: 9px !important; border-radius: 4px !important; }
+  .step-grid { gap: 2.5px !important; }
+  .step-pad { height: 100% !important; border-radius: 3px !important; border-bottom-width: 2px !important; }
+  .pad-corner-led { width: 3px !important; height: 3px !important; top: 2.5px !important; left: 2.5px !important; }
+
+  /* Compact Orange Wing in Mobile Landscape */
+  .transport-bar { padding: 6px 8px !important; gap: 5px !important; }
+  .wing-top-section { gap: 5px !important; }
+  .kit-selector-btn { height: 26px !important; padding: 0 7px !important; font-size: 10px !important; gap: 4px !important; }
+  .kit-label-prefix { font-size: 9px !important; }
+  .pattern-banks-container { padding: 2px !important; gap: 2px !important; }
+  .pattern-bank-btn { height: 22px !important; font-size: 10px !important; }
+  .wing-divider { display: none !important; }
+  .wing-controls-grid { gap: 4px !important; }
+  .wing-control-cell { padding: 4px !important; gap: 2px !important; border-radius: 6px !important; }
+  .wing-knob-cap { display: none !important; }
+  .transport-value { font-size: 13px !important; }
+  .btn-bpm-step { width: 19px !important; height: 19px !important; }
+  .btn-tempo-tool { height: 18px !important; padding: 0 4px !important; font-size: 8.5px !important; }
+  .btn-swing-toggle { padding: 1px 2px !important; gap: 2px !important; }
+  .master-volume-track { min-width: 56px !important; height: 7px !important; }
+  .btn-utility-tool, .btn-clear-pattern { height: 22px !important; padding: 0 4px !important; font-size: 8.5px !important; gap: 2px !important; }
+  .wing-bottom-deck { gap: 6px !important; padding-top: 2px !important; }
+  .btn-transport-play { height: 42px !important; flex-direction: row !important; gap: 4px !important; padding: 0 8px !important; font-size: 10px !important; border-bottom-width: 3px !important; }
+  .wing-speaker-grille { max-height: 42px !important; background-size: 6px 6px !important; }
 }
-@media (max-width: 900px), (max-height: 560px) {
+
+/* Portrait Phone & Narrow Screens: stacked horizontal transport strip */
+@media (max-width: 900px) and (orientation: portrait) {
   .studio-layout { padding: 0 !important; }
-  .device-body { height: 100% !important; max-width: 100% !important; border-radius: 0 !important; border: none !important; box-shadow: none !important; overflow: visible !important; }
+  .device-shell-shadow { height: 100% !important; filter: none !important; }
+  .device-body { height: 100% !important; max-width: 100% !important; flex-direction: column !important; clip-path: none !important; border-radius: 0 !important; border: none !important; box-shadow: none !important; overflow: visible !important; }
+  .device-chassis-left { flex: 1 1 auto !important; min-height: 0 !important; border-bottom: none !important; }
+  .device-chassis-right { width: 100% !important; flex-shrink: 0 !important; border-left: none !important; border-top: 2px solid var(--bb-chassis-grey-lip) !important; border-bottom: none !important; order: 0; }
   .sequencer-workspace { flex: 1 !important; }
   .channel-list { flex: 1 !important; justify-content: center !important; }
   .channel-row { flex: 1 1 0 !important; height: auto !important; max-height: none !important; }
   .hide-on-mobile { display: none !important; }
   .mobile-only-btn { display: inline-flex !important; align-items: center; justify-content: center; }
   .transport-bar {
+    flex-direction: row !important;
+    align-items: center !important;
     overflow-x: auto;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--bb-border) transparent;
-    gap: 8px !important;
-    padding: 0 10px !important;
+    gap: 10px !important;
+    padding: 6px 10px !important;
     min-height: 52px;
     width: 100%;
     max-width: 100%;
+  }
+  .wing-top-section,
+  .wing-controls-grid,
+  .wing-bottom-deck {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0 !important;
+  }
+  .wing-control-cell {
+    flex-direction: row !important;
+    padding: 4px 8px !important;
+  }
+  .wing-knob-cap,
+  .wing-speaker-grille,
+  .wing-divider {
+    display: none !important;
+  }
+  .btn-transport-play {
+    width: auto !important;
+    height: 36px !important;
+    flex-direction: row !important;
+    padding: 0 14px !important;
   }
   .transport-bar > * {
     flex-shrink: 0;
@@ -937,6 +1361,9 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
     background: var(--bb-border);
     border-radius: 999px;
   }
+}
+
+@media (max-width: 900px), (max-height: 560px) {
   .kit-dropdown-menu {
     max-height: 260px !important;
   }
@@ -991,14 +1418,6 @@ button:focus-visible, input:focus-visible, [tabindex="0"]:focus-visible { outlin
     padding: 8px 18px !important;
     font-size: 12px !important;
   }
-}
-@media (max-height: 520px) and (orientation: landscape) {
-  .transport-bar { min-height: 44px !important; padding-top: 2px !important; padding-bottom: 2px !important; gap: 8px !important; }
-  .btn-transport-play { height: 32px !important; padding: 0 12px !important; }
-  .kit-selector-btn { height: 32px !important; padding: 0 10px !important; font-size: 11px !important; }
-  .btn-utility-tool { height: 30px !important; padding: 0 7px !important; font-size: 10px !important; }
-  .pattern-bank-btn { width: 28px !important; height: 28px !important; font-size: 11px !important; }
-  .master-volume-track { width: 80px !important; }
 }
 @media (max-width: 480px) and (orientation: portrait) { .studio-layout { min-width: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Check, Play, Moon, Sun, Sparkles } from 'lucide-react';
+import { X, Check, Play } from 'lucide-react';
 import { KitId, DrumChannel } from '../../types';
 import type { PatternData } from '../../state/patternPersistence';
+import { ThemePicker, type ThemeId } from './ThemePicker';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -18,7 +19,7 @@ interface SettingsModalProps {
   onDeletePattern: (id: string) => void;
   onImportPattern: (raw: string) => void;
   onExportPattern: () => void;
-  theme: 'light' | 'dark';
+  theme: ThemeId;
   onClose: () => void;
   onSelectKit: (kitId: KitId) => void;
   onChangeChannelVolume: (channelId: string, volume: number) => void;
@@ -26,10 +27,10 @@ interface SettingsModalProps {
   onToggleChannelSolo: (channelId: string) => void;
   onPreviewChannel: (channelId: string) => void;
   onPreviewKitSound?: (kitId: KitId) => void;
-  onToggleTheme: () => void;
+  onSelectTheme: (id: ThemeId) => void;
   reducedMotion: boolean;
   onToggleReducedMotion: () => void;
-  onReplayIntro: () => void;
+  onReplayIntro?: () => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -55,10 +56,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onToggleChannelSolo,
   onPreviewChannel,
   onPreviewKitSound,
-  onToggleTheme,
+  onSelectTheme,
   reducedMotion,
   onToggleReducedMotion,
-  onReplayIntro,
 }) => {
   const [activeTab, setActiveTab] = useState<'kits' | 'channels' | 'patterns' | 'appearance' | 'settings'>('kits');
   const [filter, setFilter] = useState<'all' | 'builtin' | 'custom'>('all');
@@ -677,31 +677,16 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           )}
 
           {activeTab === 'appearance' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <h2 className="font-heading" style={{ fontSize: '20px', fontWeight: 700, margin: 0 }}>
-                Appearance & Theme
-              </h2>
-              <div
-                className="neu-raised-sm"
-                style={{
-                  padding: '16px',
-                  borderRadius: '10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
-                  <div style={{ fontWeight: 650 }}>Color Theme</div>
-                  <div style={{ fontSize: '12px', color: 'var(--bb-text-secondary)' }}>
-                    Currently using {theme === 'light' ? 'Warm Ivory Light' : 'Dark Neumorphic'} mode
-                  </div>
-                </div>
-                <button type="button" onClick={onToggleTheme} className="btn-hardware" style={{ padding: '8px 16px' }}>
-                  {theme === 'light' ? <Moon size={15} /> : <Sun size={15} />}
-                  <span>Switch Theme</span>
-                </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div>
+                <h2 className="font-heading" style={{ fontSize: '20px', fontWeight: 700, margin: 0 }}>
+                  Appearance & Theme
+                </h2>
+                <p style={{ fontSize: '13px', color: 'var(--bb-text-secondary)', margin: '5px 0 0' }}>
+                  Choose a colour palette — changes apply instantly to the whole instrument.
+                </p>
               </div>
+              <ThemePicker activeTheme={theme} onSelectTheme={onSelectTheme} />
             </div>
           )}
 
@@ -723,35 +708,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 <strong>Keyboard shortcut</strong>
                 <div style={{ marginTop: '5px', fontSize: '12px', color: 'var(--bb-text-secondary)' }}>Space toggles playback when focus is not in a text field.</div>
               </section>
-              <div
-                className="neu-raised-sm"
-                style={{
-                  padding: '16px',
-                  borderRadius: '10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
-                  <div style={{ fontWeight: 650 }}>Replay Introduction</div>
-                  <div style={{ fontSize: '12px', color: 'var(--bb-text-secondary)' }}>
-                    Show the first-visit landing page again
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    onReplayIntro();
-                    onClose();
-                  }}
-                  className="btn-hardware"
-                  style={{ padding: '8px 16px' }}
-                >
-                  <Sparkles size={15} />
-                  <span>Show Landing Page</span>
-                </button>
-              </div>
             </div>
           )}
         </div>

@@ -1,32 +1,37 @@
-# BEATBLOCK — Project Documentation Pack
+# BeatBlock
 
-A documentation-first blueprint for building BEATBLOCK: a playable, neumorphic browser drum machine.
+A tactile, neumorphic 8-channel × 16-step drum machine in the browser built with React, TypeScript, and the Web Audio API.
 
-## Product decisions already locked
-- Visual identity: warm ivory + signal orange, tactile neumorphic surfaces.
-- Landing page: shown on first visit; returning visits go directly to the studio. Include a way to replay the intro.
-- Main studio: full instrument, designed around eight drum channels and a 16-step sequencer.
-- Settings and customization: one full-screen workspace, separated into internal sections.
-- Saving: manual named saves plus autosave/recovery.
-- Sound: both samples and synthesis, with bundled starter sound packs.
-- Responsive behavior: desktop full board; mobile landscape compact board; portrait orientation prompt where the instrument cannot fit usefully.
-- Shared engine/state: desktop and mobile are two presentations of the same instrument state.
-- No account or cloud backend required for MVP.
+## Features
 
-## Suggested documentation order
-1. `docs/01-product/PRD.md`
-2. `docs/01-product/USER_FLOWS.md`
-3. `docs/02-design/DESIGN_SYSTEM.md`
-4. `docs/02-design/DESIGN_TOKENS.json`
-5. `docs/02-design/RESPONSIVE_SPEC.md`
-6. `docs/03-engine/AUDIO_ENGINE_SPEC.md`
-7. `docs/03-engine/PATTERN_DATA_MODEL.md`
-8. `docs/04-engineering/TECHNICAL_ARCHITECTURE.md`
-9. `docs/04-engineering/IMPLEMENTATION_PLAN.md`
-10. `docs/05-quality/QA_ACCEPTANCE.md`
+- **8 × 16 Step Sequencer** — Real-time Web Audio scheduling with tempo, swing, per-channel volume, mute/solo, and kit selection.
+- **Hybrid Sound Engine** — Combines bundled WAV drum samples with synthesized Web Audio voices.
+- **Pattern Persistence** — Local autosave with session recovery plus manual named pattern saves.
+- **Responsive Studio** — Full desktop board, compact mobile landscape layout, and portrait orientation prompt.
+- **Landing Showcase** — Product launch hero with direct entry into the studio.
 
-## Important implementation note
-These files define product behavior and intended architecture, not an existing codebase. Treat specific libraries as recommendations until the repository and current toolchain are inspected. Do not claim a feature is implemented merely because it is specified here.
+## Tech Stack
 
-## MVP boundary
-Build a reliable, fun single-user instrument before adding cloud accounts, collaboration, MIDI device support, recording/export of rendered audio, or user-uploaded samples.
+- **UI:** React 19, TypeScript, Vite 6, Lucide React
+- **Audio:** Web Audio API
+- **Testing:** Vitest, Testing Library, jsdom
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+### Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check with `tsc` and build for production |
+| `npm test` | Run the Vitest test suite |
+| `npm run preview` | Preview the production build locally |
+
+## Documentation
+
+Product, design, and engine specifications live in [`docs/`](./docs).

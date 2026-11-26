@@ -30,6 +30,9 @@ export const SequencerPad: React.FC<SequencerPadProps> = ({
       className={`step-pad pad-group-${groupIdx}${isActive ? ' is-active' : ''}${isCurrentStep ? ' is-current' : ''}${isDownbeat ? ' is-downbeat' : ''}${isMuted ? ' is-muted' : ''}`}
       data-node-id={isActive ? '3:1006' : '3:1007'}
     >
+      {/* Hardware corner LED */}
+      <span className="pad-corner-led" aria-hidden="true" />
+
       {/* Playhead Center Dot when active */}
       {isCurrentStep && isActive && (
         <span className="pad-playhead-dot-active" />
@@ -38,16 +41,6 @@ export const SequencerPad: React.FC<SequencerPadProps> = ({
       {/* When playhead sweeps inactive pad: signal orange pip */}
       {isCurrentStep && !isActive && (
         <span className="pad-playhead-pip" />
-      )}
-
-      {/* Downbeat accent dot when not playhead and not active */}
-      {!isCurrentStep && !isActive && isDownbeat && (
-        <span className="pad-downbeat-pip" />
-      )}
-
-      {/* Active step center indicator pip */}
-      {!isCurrentStep && isActive && !isMuted && (
-        <span className="pad-active-pip" />
       )}
     </button>
   );

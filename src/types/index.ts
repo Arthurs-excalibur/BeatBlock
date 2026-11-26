@@ -32,8 +32,18 @@ export interface MasterState {
   activePatternName: string;
 }
 
+export type ThemeId =
+  | 'light'
+  | 'dark'
+  | 'dusk'
+  | 'ocean'
+  | 'forest'
+  | 'violet'
+  | 'midnight'
+  | 'ember';
+
 export interface AppPreferences {
   introSeen: boolean;
-  theme: 'light' | 'dark';
+  theme: ThemeId;
   reducedMotion: boolean;
 }
